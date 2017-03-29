@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 class UserForm(forms.Form):
-    username = forms.CharField(label="username", max_length=100)
+    username = forms.CharField(label="Username", max_length=100)
     password1 = forms.CharField(label="password1", max_length=100)
     password2 = forms.CharField(label="password2", max_length=100)
 
