@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 import functionalities.views as functions
 
@@ -22,6 +23,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', functions.index, name='index'),
     url(r'^register/', functions.register, name='register'),
+    url(r'^logout/$', auth_views.logout, {'template_name': 'logged_out.html'}, name='logout'),
+    url(r'^login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'^home/', functions.home, name='home'),
 
 ]

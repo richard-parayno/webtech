@@ -1,9 +1,10 @@
 <html>
+<head>
+</head>
 <body>
-  <form action="/home/" method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
-  </form>
+  <h1>Welcome!</h1>
+  <a href="{% url "register" %}">Create Account</a>
+  <a href="{% url "login"%}">Log In</a>
+  
 </body>
 </html>

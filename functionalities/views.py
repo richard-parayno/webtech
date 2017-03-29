@@ -1,28 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+
+
 
 from .forms import UserForm
-from .forms import LogInForm
 
 
 # Create your views here.
 def index(request):
-    if request.method == "POST":
-        form = LogInForm(request.POST)
-        if form.is_valid():
-            user = authenticate(username = form.cleaned_data['username'], password = form.cleaned_data['password1'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('home')
-                else:
-                    return HttpResponseNotFound('<h1>User is inactive. Please inform the administrator.')
-    else:
-        form = LogInForm()
+    return render(request, 'index.html')
 
-    return render(request, 'index.html', {'form' : form})
+def login(request):
+    return render(request, 'login.html')
 
+def logout(request):
+    logout(request)
+    return redirect('index')
 
 def register(request):
     if request.method == "POST":
@@ -30,9 +25,13 @@ def register(request):
         if form.is_valid():
             user = User.objects.create_user(
             username = form.cleaned_data['username'],
-            password = form.cleaned_data['password1']
+            email = form.cleaned_data['email'],
+            password = form.cleaned_data['password']
             )
-            return HttpResponseRedirect(' ')
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.save()
+            return redirect('index')
     else:
         form = UserForm()
 
