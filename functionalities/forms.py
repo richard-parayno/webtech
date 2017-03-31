@@ -7,8 +7,8 @@ class UserForm(forms.Form):
     last_name = forms.CharField(label="Last Name", max_length=100)
     username = forms.CharField(label="Username", max_length=100)
     email = forms.EmailField(label="Email", max_length=100)
-    password = forms.CharField(label="password", max_length=50, widget=forms.PasswordInput)
-    password2 = forms.CharField(label="password2", max_length=50, widget=forms.PasswordInput)
+    password = forms.CharField(label="Password", max_length=50, widget=forms.PasswordInput)
+    password2 = forms.CharField(label="Confirm Password", max_length=50, widget=forms.PasswordInput)
 
 
     def clean_username(self):

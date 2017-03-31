@@ -10,14 +10,9 @@ from .forms import UserForm
 
 # Create your views here.
 def index(request):
+    logout(request)
     return render(request, 'index.html')
 
-def login(request):
-    return render(request, 'login.html')
-
-def logout(request):
-    logout(request)
-    return redirect('index')
 
 def register(request):
     if request.method == "POST":
@@ -40,4 +35,7 @@ def register(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+    if request.user.is_authenticated:
+        return render(request, 'home.html')
+    else:
+        return render(request, 'index.html')
