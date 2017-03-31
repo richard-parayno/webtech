@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'functionalities',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -76,13 +78,8 @@ WSGI_APPLICATION = 'webtechproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'NAME': 'optimus',        
-        'ENGINE': 'mysql.connector.django',
-        'USER': 'root',
-        'PASSWORD': '',
-        'OPTIONS': {
-            'autocommit': True,
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 

@@ -2,9 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.db import connection
 
-
-
+from .models import *
 from .forms import UserForm
 
 
@@ -39,3 +39,21 @@ def home(request):
         return render(request, 'home.html')
     else:
         return render(request, 'index.html')
+
+def viewInventory(request):
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT * FROM equipments e JOIN equipmentcategory c ON e.equipmentCategoryID = c.equipmentCategoryID JOIN equipmentstatus s on e.equipmentStatus = s.equipmentStatus')
+        row = cursor.fetchall()
+    
+    return render(request, 'warehouseinventory.html', {'inventory': row })
+
+
+#def requestEquipmentForProject(request):
+
+
+#def requestMaterialsForProject(request):
+
+
+#def viewProjectMaterials(request):
+
+#def viewProjectEquipment(request):
